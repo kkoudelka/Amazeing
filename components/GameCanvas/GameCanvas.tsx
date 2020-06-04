@@ -6,17 +6,29 @@ import { useState } from "react";
 import axios from "axios";
 import { productionEndpoint } from "../../src/endpoints";
 import BoardContainer from "../GameBoard/BoardContainer";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles({
+    content: {
+        padding: "2rem",
+        margin: "2rem",
+    },
+});
 
 const GameCanvas: React.FC<{}> = () => {
+
+    const classes = useStyles();
 
     const [gameProgression, setGameProgression] = useState<IGameProgression[]>([]);
 
     const commitCommand = async (command: MazeCommands) => {
-        
-        // TODO: Update fields when reseted
-        // if (command === "reset") {
-        //     setGameProgression([]);
-        // }
+
+        let current = gameProgression;
+
+        if (command === "reset") {
+            current = [];
+        }
 
         const data: IApiRequest = {
             command,
@@ -25,7 +37,7 @@ const GameCanvas: React.FC<{}> = () => {
 
         const gp: IGameProgression = {
             request: data,
-            id: gameProgression.length + 1,
+            id: current.length + 1,
         };
 
 
@@ -41,18 +53,25 @@ const GameCanvas: React.FC<{}> = () => {
         if (result.status === 200) {
             const res: IApiResponse = result.data;
             gp.response = res;
-            setGameProgression([gp, ...gameProgression]);
+            current = [gp, ...current];
+            
         }
+
+        setGameProgression(current);
     };
 
     return <>
-        <Grid container spacing={8}>
+        <Grid container>
             <Grid item xs>
-                <BoardContainer gameProgression={gameProgression} />
+                <Paper className={classes.content}>
+                    <BoardContainer gameProgression={gameProgression} />
+                </Paper>
             </Grid>
             <Grid item xs>
-                <Actions commandHandler={commitCommand}
-                    currentGameProgression={gameProgression[0] || null} />
+                <Paper className={classes.content}>
+                    <Actions commandHandler={commitCommand}
+                        currentGameProgression={gameProgression[0] || null} />
+                </Paper>
             </Grid>
         </Grid>
     </>;

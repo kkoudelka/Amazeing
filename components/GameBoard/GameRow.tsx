@@ -23,7 +23,7 @@ const GameRow: React.FC<IProps> = ({ row }) => {
         <TableCell align="left">{request.command}</TableCell>
         <TableCell align="right">
             <Grid container direction="column">
-                {!success && <Grid item>
+                {!success && <Grid item style={{ color: "red" }}>
                     This action is not possible
                     </Grid>
                 }
