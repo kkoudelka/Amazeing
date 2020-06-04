@@ -1,7 +1,7 @@
 import * as React from "react";
 import Grid from "@material-ui/core/Grid";
 import Actions from "../Actions/Actions";
-import { IApiResponse, MazeCommands, IApiRequest, IGameProgression, IGameCell, ICoords } from "../../src/models/types";
+import { IApiResponse, MazeCommands, IApiRequest, IGameProgression, IGameCell, ICoords } from "../../src/types";
 import { useState } from "react";
 import axios from "axios";
 import { productionEndpoint } from "../../src/endpoints";
@@ -28,7 +28,7 @@ const GameCanvas: React.FC<{}> = () => {
 
     const { response: { haveKey } } = gameProgression[0] || { response: { haveKey: false } };
 
-    const commitCommand = async (command: MazeCommands) => {
+    const commitCommand = async (command: MazeCommands, addToProgression = true) => {
 
         let currentProgression = gameProgression;
         let currentCoordinates = currentCoords;
@@ -62,8 +62,11 @@ const GameCanvas: React.FC<{}> = () => {
 
         if (result.status === 200) {
             const res: IApiResponse = result.data;
-            gp.response = res;
-            currentProgression = [gp, ...currentProgression];
+            if (addToProgression) {
+                gp.response = res;
+                currentProgression = [gp, ...currentProgression];
+            }
+            
 
             if (!res.success) {
                 const newCoords: ICoords = {
@@ -137,7 +140,7 @@ const GameCanvas: React.FC<{}> = () => {
                     <BoardContainer gameProgression={gameProgression} />
                 </Paper>
             </Grid>
-            <Grid item xs container direction="column">
+            <Grid item xs container direction="column" spacing={2}>
 
                 <Grid item>
                     <Paper className={classes.content}>

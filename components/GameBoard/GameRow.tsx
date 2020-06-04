@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IApiResponse, IGameProgression } from "../../src/models/types";
+import { IApiResponse, IGameProgression } from "../../src/types";
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { Grid } from "@material-ui/core";

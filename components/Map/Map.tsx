@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IGameCell, ICoords } from "../../src/models/types";
+import { IGameCell, ICoords } from "../../src/types";
 import MapTile from "./MapTile";
 
 interface IProps {
@@ -13,7 +13,7 @@ const GameMap: React.FC<IProps> = ({ gameCells, currentPosition }) => {
         <div style={{
             position: "relative",
             width: "100%",
-            height: "20rem"
+            height: "27rem"
         }}>
             {
                 gameCells.map((cell) => <MapTile cell={cell} current={cell.coords === currentPosition} />)

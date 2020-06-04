@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IGameCell, MazeItem } from "../../src/models/types";
+import { IGameCell, MazeItem } from "../../src/types";
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
