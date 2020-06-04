@@ -26,6 +26,8 @@ const GameCanvas: React.FC<{}> = () => {
     const [gameCells, setGameCells] = useState<IGameCell[]>([]);
     const [currentCoords, setCurrentCoords] = useState<ICoords>({ x: 0, y: 0 });
 
+    const { response: { haveKey } } = gameProgression[0] || { response: { haveKey: false } };
+
     const commitCommand = async (command: MazeCommands) => {
 
         let currentProgression = gameProgression;
@@ -82,6 +84,7 @@ const GameCanvas: React.FC<{}> = () => {
                     const gc: IGameCell = {
                         coords: newCoords,
                         colour: "#000000",
+                        item: "none",
                     };
 
                     currentCells = [gc, ...currentCells];
@@ -109,6 +112,11 @@ const GameCanvas: React.FC<{}> = () => {
                     const gc: IGameCell = {
                         coords: newCoords,
                         colour: res.lightColor || "",
+                        item: res.youSee === "key"
+                            ? "key"
+                            : res.youSee === "exit"
+                                ? "door"
+                                : "none",
                     };
 
                     currentCells = [gc, ...currentCells];
@@ -141,6 +149,9 @@ const GameCanvas: React.FC<{}> = () => {
                     <Paper className={classes.content}>
                         <Typography>
                             Current coordinates: {currentCoords.x}, {currentCoords.y}
+                        </Typography>
+                        <Typography>
+                            You have: {haveKey ? "a key" : "nothing"}
                         </Typography>
                         <GameMap gameCells={gameCells} currentPosition={currentCoords} />
                     </Paper>

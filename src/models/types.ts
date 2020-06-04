@@ -18,9 +18,12 @@ export interface IGameProgression {
 
 export type MazeCommands = "north" | "south" | "east" | "west" | "reset" | "grab" | "exit";
 
+export type MazeItem = "none" | "key" | "door";
+
 export interface IGameCell {
     coords: ICoords;
     colour: string;
+    item: MazeItem;
 }
 
 export interface ICoords {

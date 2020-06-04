@@ -1,5 +1,7 @@
 import * as React from "react";
-import { IGameCell } from "../../src/models/types";
+import { IGameCell, MazeItem } from "../../src/models/types";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 
 interface IProps {
     cell: IGameCell;
@@ -8,7 +10,7 @@ interface IProps {
 
 const MapTile: React.FC<IProps> = ({ cell, current }) => {
 
-    const { colour, coords } = cell;
+    const { colour, coords, item } = cell;
     const { x, y } = coords;
 
     const transformX = current
@@ -31,6 +33,8 @@ const MapTile: React.FC<IProps> = ({ cell, current }) => {
             transform: `translate(${transformX}px,${transformY}px)`,
             border: current ? "2px solid black" : "",
         }}>
+            {item === "key" && <VpnKeyIcon fontSize="small" />}
+            {item === "door" && <MeetingRoomIcon fontSize="small" />}
 
         </div>
     </>;
