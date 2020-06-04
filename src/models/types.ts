@@ -10,4 +10,10 @@ export interface IApiRequest {
     token: string,
 };
 
+export interface IGameProgression {
+    request: IApiRequest;
+    response?: IApiResponse;
+    id: number;
+}
+
 export type MazeCommands = "north" | "south" | "east" | "west" | "reset" | "grab" | "exit";
