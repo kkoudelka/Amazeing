@@ -3,6 +3,7 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Getting started
 First, install all dependencies:
 
 ```bash
@@ -26,3 +27,9 @@ You can change the endpoint in
 ```bash
 ./src/endpoints.ts
 ```
+
+## Troubleshooting
+
+If the project doesn't work for some reason (Unauthorized), check [this page on Moodle](https://student.delta-studenti.cz/mod/page/view.php?id=45205) (for Delta - SŠIE students only).
+
+
